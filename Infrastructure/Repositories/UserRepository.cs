@@ -13,7 +13,7 @@ namespace Login_back.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(string id)
         {
             var user = await _context.Users.FindAsync(id);
             return user ?? throw new Exception("User not found");
@@ -28,6 +28,7 @@ namespace Login_back.Infrastructure.Repositories
         {
             await _context.Users.AddAsync(entity);
         }
+
         public async Task<User> GetByEmailAsync(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
