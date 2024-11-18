@@ -16,7 +16,7 @@ namespace Login_back.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(string id)
         {
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null)
@@ -34,7 +34,7 @@ namespace Login_back.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] User updatedUser)
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] User updatedUser)
         {
             var existingUser = await _userRepository.GetByIdAsync(id);
             if (existingUser == null)
@@ -58,7 +58,7 @@ namespace Login_back.Presentation.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null)
