@@ -43,6 +43,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); // Configure this as per your needs
+    });
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Login API", Version = "v1" });
@@ -84,6 +93,9 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Login API V1");
     c.RoutePrefix = "swagger";
 });
+
+// Use CORS middleware
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
